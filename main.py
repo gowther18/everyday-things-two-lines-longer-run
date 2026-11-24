@@ -52,8 +52,15 @@ def check_length(text: str) -> None:
         )
 
 
+def check_no_trailing_newline(text: str) -> None:
+    """The entry text ends without a trailing newline by design."""
+    if text.endswith("\n"):
+        raise SystemExit("entry text must not end with a trailing newline")
+
+
 def main() -> None:
     check_length(TEXT)
+    check_no_trailing_newline(TEXT)
     out = Path("/output/entry.txt")
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(TEXT, encoding="utf-8")
